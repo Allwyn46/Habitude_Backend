@@ -1,0 +1,12 @@
+{
+  "name": "habitude_backend",
+  "version": "1.0.0",
+  "description": "Habit Tracking App",
+  "license": "ISC",
+  "author": "Allwyn46",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
