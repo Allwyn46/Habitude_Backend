@@ -23,7 +23,13 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {};
+export const login = async (req, res) => {
+  res.status(200).json({
+    message: "User Logged in Successfully",
+    username: req.user.username,
+    ismfaactive: req.user.ismfaactive,
+  });
+};
 
 export const authStatus = async (req, res) => {};
 export const logout = async (req, res) => {};
