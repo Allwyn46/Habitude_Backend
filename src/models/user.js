@@ -1,7 +1,7 @@
 import { supabase } from "../configs/dbConnect.js";
 
 class UserModel {
-  static table = "users";
+  static table = "Users";
 
   static async create(user) {
     // Always hash password before calling this method!
