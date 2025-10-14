@@ -9,9 +9,23 @@ dotenv.config();
 const app = express();
 
 // Middlewares
+const corsOptions = {
+  origin: [process.env.FRONTEND],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(json({ limit: "100mb" }));
 app.use(urlencoded({ limit: "100mb", extended: true }));
-
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 60000 * 60,
+    },
+  }),
+);
 //Routes
 
 // Default Listen
