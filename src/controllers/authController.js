@@ -90,5 +90,53 @@ export const setup2fa = async (req, res) => {
     });
   }
 };
-export const verify2fa = async (req, res) => {};
-export const reset2fa = async (req, res) => {};
+export const verify2fa = async (req, res) => {
+  const { token } = req.body;
+  const user = req.user;
+
+  const verified = speakeasy.totp.verify({
+    secret: user.twofactorsecret,
+    encoding: "base32",
+    token: token,
+  });
+
+  if (verified) {
+    const jwtToken = jwt.sign(
+      {
+        username: user.username,
+      },
+      process.env.JWTSECRET,
+      {
+        expiresIn: "1hr",
+      },
+    );
+
+    res.status(200).json({
+      messae: "2FA successful",
+      token: jwtToken,
+    });
+  } else {
+    res.status(400).json({
+      message: "Invalid 2FA Token",
+    });
+  }
+};
+export const reset2fa = async (req, res) => {
+  try {
+    const user = req.user;
+
+    await UserModel.update(user.id, {
+      ismfaactive: false,
+      twofactorsecret: "",
+    });
+
+    res.status(200).json({
+      message: "2FA reset successful",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "failed to reset 2FA",
+      error: error,
+    });
+  }
+};
