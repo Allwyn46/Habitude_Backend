@@ -38,12 +38,14 @@ export const authStatus = async (req, res) => {
   if (req.user) {
     res.status(200).json({
       message: "User logged in",
+      isloggedin: true,
       username: req.user.username,
       ismfaactive: req.user.ismfaactive,
     });
   } else {
     res.status(401).json({
       message: "Unauthorized User",
+      isloggedin: false,
     });
   }
 };
