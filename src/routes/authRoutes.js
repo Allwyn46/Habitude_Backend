@@ -8,6 +8,7 @@ import {
   reset2fa,
   setup2fa,
   verify2fa,
+  updateUser,
 } from "../controllers/authController.js";
 
 const router = Router();
@@ -53,12 +54,12 @@ router.post(
 
 //Update User
 router.put(
-  "/auth/update",
+  "/update",
   (req, res, next) => {
     if (req.isAuthenticated()) return next();
     res.status(401).json({ message: "Unauthorized" });
   },
-  reset2fa,
+  updateUser,
 );
 
 export default router;

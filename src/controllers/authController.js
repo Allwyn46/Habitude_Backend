@@ -41,6 +41,8 @@ export const authStatus = async (req, res) => {
       isloggedin: true,
       username: req.user.username,
       ismfaactive: req.user.ismfaactive,
+      userid: req.user.id,
+      name: req.user.name,
     });
   } else {
     res.status(401).json({
@@ -147,7 +149,7 @@ export const reset2fa = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { name, username, id } = req.body;
-    const updateUser = await UserModel.findById(id, {
+    await UserModel.update(id, {
       username: username,
       name: name,
     });
