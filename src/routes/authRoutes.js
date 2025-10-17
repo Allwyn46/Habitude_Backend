@@ -51,4 +51,14 @@ router.post(
   reset2fa,
 );
 
+//Update User
+router.post(
+  "/auth/update",
+  (req, res, next) => {
+    if (req.isAuthenticated()) return next();
+    res.status(401).json({ message: "Unauthorized" });
+  },
+  reset2fa,
+);
+
 export default router;

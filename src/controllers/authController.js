@@ -65,7 +65,7 @@ export const setup2fa = async (req, res) => {
   try {
     const user = req.user;
     let secret = speakeasy.generateSecret();
-    console.log(secret);
+
     await UserModel.update(user.id, {
       twofactorsecret: secret.base32,
       ismfaactive: true,
@@ -83,6 +83,7 @@ export const setup2fa = async (req, res) => {
     res.status(200).json({
       messae: "2FA setup completed",
       qrcode: qrImageUrl,
+      secret: secret.base32,
     });
   } catch (error) {
     res.status(500).json({
@@ -139,6 +140,28 @@ export const reset2fa = async (req, res) => {
     res.status(500).json({
       message: "failed to reset 2FA",
       error: error,
+    });
+  }
+};
+
+export const updateUser = async (req, res) => {
+  try {
+    const { name, username, id } = req.body;
+    const updateUser = await UserModel.findById(id, {
+      username: username,
+      name: name,
+    });
+
+    res.status(201).json({
+      message: "User Updated Successfully",
+      result: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Error Updating User",
+      message: error.message,
+      details: error,
+      result: false,
     });
   }
 };
