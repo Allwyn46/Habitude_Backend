@@ -52,7 +52,7 @@ router.post(
 );
 
 //Update User
-router.post(
+router.put(
   "/auth/update",
   (req, res, next) => {
     if (req.isAuthenticated()) return next();
