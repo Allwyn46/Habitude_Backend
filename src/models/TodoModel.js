@@ -43,6 +43,17 @@ class TodoModel {
     return data;
   }
 
+  static async findByUserId(userid) {
+    const { data, error } = await supabase
+      .from(this.table)
+      .select("*")
+      .eq("username", userid)
+      .maybeSingle();
+
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
   static async update(id, updates) {
     updates.updated_at = new Date().toISOString(); // keep updated_at fresh
     const { data, error } = await supabase
