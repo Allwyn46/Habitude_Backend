@@ -65,3 +65,43 @@ export const updateTodo = async (req, res) => {
     });
   }
 };
+
+export const markcomplete = async (req, res) => {
+  try {
+    const { id } = req.body;
+    await TodoModel.update(id, {
+      is_completed: true,
+    });
+
+    res.status(200).json({
+      message: "Todo Completed Successfully",
+      result: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Error Updating Todo",
+      message: error.message,
+      details: error,
+      result: false,
+    });
+  }
+};
+
+export const deleteTodo = async (req, res) => {
+  try {
+    const { id } = req.body;
+    await TodoModel.delete(id);
+
+    res.status(200).json({
+      message: "Todo Deleted Successfully",
+      result: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Error deleting Todo",
+      message: error.message,
+      details: error,
+      result: false,
+    });
+  }
+};
