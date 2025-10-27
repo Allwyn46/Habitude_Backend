@@ -1,4 +1,3 @@
-import UserModel from "../models/user.js";
 import TodoModel from "../models/TodoModel.js";
 
 export const createTodo = async (req, res) => {
