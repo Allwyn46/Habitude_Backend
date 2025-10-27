@@ -2,10 +2,12 @@ import TodoModel from "../models/TodoModel.js";
 
 export const createTodo = async (req, res) => {
   try {
-    const { userid, todo, date } = req.body;
+    const { userid, title, description, category, date } = req.body;
     await TodoModel.create({
       userid: userid,
-      todo: todo,
+      todo_title: title,
+      todo_desc: description,
+      todo_category: category,
       date: date,
       is_completed: false,
     });
