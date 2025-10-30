@@ -46,9 +46,11 @@ export const getAllTodos = async (req, res) => {
 
 export const updateTodo = async (req, res) => {
   try {
-    const { id, todo, date, is_completed } = req.body;
+    const { id, title, description, category, date } = req.body;
     await TodoModel.update(id, {
-      todo: todo,
+      todo_title: title,
+      todo_desc: description,
+      todo_category: category,
       date: date,
       is_completed: is_completed,
     });

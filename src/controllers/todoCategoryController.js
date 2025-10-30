@@ -21,7 +21,8 @@ export const createCategory = async (req, res) => {
 };
 
 export const getAllCategory = async (req, res) => {
-  const categories = await CategoryModel.findAll();
+  const user = req.user;
+  const categories = await CategoryModel.findByUserId(user.id);
 
   if (todos) {
     res.status(200).json({
