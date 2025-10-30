@@ -1,7 +1,7 @@
 import { supabase } from "../configs/dbConnect.js";
 
 class TodoModel {
-  static table = "todos";
+  static table = "todo";
 
   static async create(todo) {
     // Always hash password before calling this method!
