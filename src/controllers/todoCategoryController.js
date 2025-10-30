@@ -24,7 +24,7 @@ export const getAllCategory = async (req, res) => {
   const user = req.user;
   const categories = await CategoryModel.findByUserId(user.id);
 
-  if (todos) {
+  if (categories) {
     res.status(200).json({
       message: "Fetched data Successfully",
       result: true,
