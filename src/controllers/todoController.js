@@ -26,7 +26,7 @@ export const createTodo = async (req, res) => {
 };
 
 export const getAllTodos = async (req, res) => {
-  const { userid } = req.body;
+  const userid = req.userid;
 
   const todos = await TodoModel.findByUserId(userid);
 
