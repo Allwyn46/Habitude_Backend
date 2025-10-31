@@ -47,8 +47,7 @@ class TodoModel {
     const { data, error } = await supabase
       .from(this.table)
       .select("*")
-      .eq("userid", userid)
-      .maybeSingle();
+      .eq("userid", userid);
 
     if (error) throw new Error(error.message);
     return data;
