@@ -44,6 +44,25 @@ export const getAllTodos = async (req, res) => {
   }
 };
 
+export const getSingleTodos = async (req, res) => {
+  const { id } = req.body;
+
+  const todos = await TodoModel.findById(id);
+
+  if (todos) {
+    res.status(200).json({
+      message: "Fetched data Successfully",
+      result: true,
+      todos: todos,
+    });
+  } else {
+    res.status(401).json({
+      message: "Failed to fetch data",
+      result: false,
+    });
+  }
+};
+
 export const updateTodo = async (req, res) => {
   try {
     const { id, title, description, category, date } = req.body;
